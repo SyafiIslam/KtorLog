@@ -290,7 +290,11 @@ private fun deleteFromFavorite(
                 is Resource.Success -> {
                     viewModel.setLoadingState(false)
                     if (it.data?.success as Boolean) {
-                        getFavoriteFilm(viewModel, this, context, type)
+                        if (type == Constant.MOVIE) {
+                            getFavoriteFilm(viewModel, this, context, type + "s")
+                        } else {
+                            getFavoriteFilm(viewModel, this, context, type)
+                        }
                         showToast("Deleted from favorite", context)
                     } else {
                         val errorMessage= it.data.status_message
@@ -327,7 +331,11 @@ private fun deleteFromWatchlist(
                 is Resource.Success -> {
                     viewModel.setLoadingState(false)
                     if (it.data?.success as Boolean) {
-                        getWatchlist(viewModel, this, context, type)
+                        if (type == Constant.MOVIE) {
+                            getWatchlist(viewModel, this, context, type + "s")
+                        } else {
+                            getWatchlist(viewModel, this, context, type)
+                        }
                         showToast("Deleted from watchlist", context)
                     } else {
                         val errorMessage= it.data.status_message
